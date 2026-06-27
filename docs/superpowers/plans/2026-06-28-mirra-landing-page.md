@@ -22,6 +22,7 @@ Create:
 - `app/page.tsx` - Home route that renders the legacy gate and marketing page.
 - `app/globals.css` - Tailwind import, Mirra design tokens, marketing styles, and legacy animation classes currently in `src/index.css`.
 - `app/not-found.tsx` - Simple branded 404 for non-hash routes.
+- `next-env.d.ts` - Next TypeScript environment references.
 - `next.config.ts` - Next image and build configuration.
 - `postcss.config.mjs` - Tailwind v4 PostCSS setup for Next.
 - `components/legacy/LegacyHashGate.tsx` - Client gate for `#/s/:slug`.
@@ -62,7 +63,7 @@ Modify:
 Keep:
 
 - `src/App.tsx`
-- `src/pages/StudentPage.tsx`
+- `src/legacy/StudentPage.tsx`
 - `src/components/ErrorPage.tsx`
 - `src/components/LoadingScreen.tsx`
 - `src/data/*`
@@ -73,6 +74,7 @@ Delete after Next build passes:
 - `index.html`
 - `vite.config.ts`
 - `src/main.tsx`
+- `src/pages/StudentPage.tsx` after moving it to `src/legacy/StudentPage.tsx`
 
 ---
 
@@ -82,11 +84,16 @@ Delete after Next build passes:
 - Modify: `package.json`
 - Modify: `tsconfig.json`
 - Modify: `eslint.config.js`
+- Modify: `.gitignore`
+- Modify: `src/App.tsx`
 - Create: `next.config.ts`
 - Create: `postcss.config.mjs`
+- Create: `next-env.d.ts`
+- Create: `src/legacy/StudentPage.tsx`
 - Delete: `vite.config.ts`
 - Delete: `index.html`
 - Delete: `src/main.tsx`
+- Delete: `src/pages/StudentPage.tsx`
 
 - [ ] **Step 1: Capture the current baseline**
 
@@ -226,7 +233,43 @@ rm index.html vite.config.ts src/main.tsx
 
 Expected: `src/App.tsx` and all student experience files remain in place.
 
-- [ ] **Step 8: Run lint and build to expose missing Next files**
+- [ ] **Step 8: Move the legacy student page out of Next's reserved `src/pages` directory**
+
+Run:
+
+```bash
+mkdir -p src/legacy
+mv src/pages/StudentPage.tsx src/legacy/StudentPage.tsx
+rmdir src/pages
+```
+
+Update `src/App.tsx`:
+
+```tsx
+import { useState, useCallback } from 'react'
+import { HashRouter, Routes, Route } from 'react-router-dom'
+import { StudentPage } from './legacy/StudentPage'
+import { ErrorPage } from './components/ErrorPage'
+import { LoadingScreen } from './components/LoadingScreen'
+```
+
+Expected: no `src/pages` directory remains, so Next does not treat the legacy student experience as a Pages Router route.
+
+- [ ] **Step 9: Add Next-generated environment files and ignores**
+
+Add `.next/` to `.gitignore`.
+
+Create `next-env.d.ts` if Next has not generated it:
+
+```ts
+/// <reference types="next" />
+/// <reference types="next/image-types/global" />
+
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/app/api-reference/config/typescript for more information.
+```
+
+- [ ] **Step 10: Run lint and build to expose missing Next files**
 
 Run:
 
@@ -235,15 +278,15 @@ npm run lint
 npm run build
 ```
 
-Expected: lint may pass, and build fails because `app/layout.tsx` and `app/page.tsx` do not exist yet. The expected build failure should mention missing App Router files or missing page files.
+Expected: lint may pass, and build fails because `app/layout.tsx` and `app/page.tsx` do not exist yet. The expected build failure should mention missing App Router or Pages Router files, such as `Couldn't find any pages or app directory`. It must not fail because of `src/pages/StudentPage.tsx`.
 
-- [ ] **Step 9: Commit migration scaffold**
+- [ ] **Step 11: Commit migration scaffold**
 
 Run:
 
 ```bash
-git add package.json package-lock.json tsconfig.json eslint.config.js next.config.ts postcss.config.mjs
-git add -u index.html vite.config.ts src/main.tsx
+git add .gitignore package.json package-lock.json tsconfig.json eslint.config.js next.config.ts postcss.config.mjs next-env.d.ts src/App.tsx src/legacy/StudentPage.tsx
+git add -u index.html vite.config.ts src/main.tsx src/pages/StudentPage.tsx
 git commit -m "chore: migrate app shell to next"
 ```
 
