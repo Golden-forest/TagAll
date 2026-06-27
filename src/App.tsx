@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { HashRouter, Routes, Route } from 'react-router-dom'
-import { StudentPage } from './pages/StudentPage'
+import { StudentPage } from './legacy/StudentPage'
 import { ErrorPage } from './components/ErrorPage'
 import { LoadingScreen } from './components/LoadingScreen'
 
