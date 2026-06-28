@@ -1,17 +1,17 @@
 {
   "brand": "Mirra",
-  "tagline": "Every tap opens a personal world.",
-  "description": "AI creates custom pages for memories, people, products, and moments. Delivered through NFC and QR.",
+  "tagline": "Tap-open gifts, made personal.",
+  "description": "High-end digital gift cards, private custom pages, and NFC admission letters for moments worth keeping.",
   "primaryCta": {
     "label": "Start a Project",
-    "href": "mailto:hello@mirra.studio?subject=Start%20a%20Mirra%20project"
+    "href": "mailto:hello@mirra.studio?subject=Start%20a%20Mirra%20gift%20project"
   },
   "secondaryCta": {
     "label": "Explore Demos",
     "href": "#live-demo"
   },
   "nav": [
-    { "label": "Products", "href": "#products" },
+    { "label": "Solutions", "href": "#products" },
     { "label": "Demos", "href": "#live-demo" },
     { "label": "How it works", "href": "#how-it-works" },
     { "label": "Gallery", "href": "#gallery" },
@@ -19,15 +19,20 @@
     { "label": "Pricing", "href": "#pricing" }
   ],
   "seo": {
-    "title": "Mirra | AI Personalized Digital Experiences",
-    "description": "Create AI-personalized digital albums, business cards, wedding invitations, portfolios, product showcases, and custom pages that open with NFC or QR.",
+    "title": "Mirra | Premium NFC Digital Gift Cards",
+    "description": "Create premium virtual gift cards, private custom digital pages, and NFC-enabled university admission letters that open with a tap or QR scan.",
     "ogImage": "/mirra/og-image.webp"
   },
   "contact": {
     "email": "hello@mirra.studio"
   },
+  "socialLinks": [
+    { "label": "Instagram", "href": "#footer" },
+    { "label": "TikTok", "href": "#footer" },
+    { "label": "X", "href": "#footer" }
+  ],
   "footerLinks": [
-    { "label": "Products", "href": "#products" },
+    { "label": "Solutions", "href": "#products" },
     { "label": "Demos", "href": "#live-demo" },
     { "label": "How it works", "href": "#how-it-works" },
     { "label": "Gallery", "href": "#gallery" },

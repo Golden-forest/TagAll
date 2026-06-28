@@ -1,38 +1,38 @@
 [
   {
-    "title": "Family Memory Album",
-    "category": "Memories",
+    "title": "Signature Gift Card",
+    "category": "Private gifts",
     "image": "/mirra/gallery-memory.webp",
-    "description": "A private story page for photos, audio notes, and shared milestones."
+    "description": "A premium card that opens a private message, gallery, and keepsake page."
   },
   {
-    "title": "Coastal Wedding Invite",
-    "category": "Weddings",
+    "title": "Campus Welcome Pack",
+    "category": "Universities",
     "image": "/mirra/gallery-wedding.webp",
-    "description": "A cinematic invitation with schedule, gallery, and travel details."
+    "description": "An admission-letter concept that opens orientation, story, and next steps."
   },
   {
-    "title": "Pet Memorial Page",
-    "category": "Pets",
+    "title": "Memorial Keepsake",
+    "category": "Keepsakes",
     "image": "/mirra/gallery-pet.webp",
-    "description": "A gentle digital keepsake that opens from a small NFC card."
+    "description": "A gentle page for photos, dates, voice notes, and shared memories."
   },
   {
-    "title": "Creator Portfolio",
-    "category": "Creators",
+    "title": "Collector Portfolio",
+    "category": "Creative",
     "image": "/mirra/gallery-creator.webp",
-    "description": "A fast personal site for work, press links, and contact."
+    "description": "A refined page for personal works, private links, and event introductions."
   },
   {
-    "title": "Studio Product Card",
-    "category": "Products",
+    "title": "Museum Product Story",
+    "category": "Culture",
     "image": "/mirra/gallery-product.webp",
-    "description": "A product story opened from packaging, retail displays, or events."
+    "description": "A cultural product card that turns packaging into a digital story."
   },
   {
-    "title": "Launch Event Pass",
+    "title": "Invitation Pass",
     "category": "Events",
     "image": "/mirra/gallery-event.webp",
-    "description": "A QR and NFC landing page for schedules, maps, and updates."
+    "description": "A private event card with schedule, map, RSVP, and guest updates."
   }
 ]

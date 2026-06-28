@@ -1,20 +1,20 @@
 [
   {
-    "quote": "Mirra made our wedding page feel personal without making us manage a website.",
-    "name": "Amelia Hart",
-    "role": "Bride",
+    "quote": "The card felt like a gift before the page even opened. The digital layer made it stay alive.",
+    "name": "Clara Bennett",
+    "role": "Private client",
     "location": "London, UK"
   },
   {
-    "quote": "The NFC card made my portfolio feel physical. People remembered it after the event.",
-    "name": "Noah Sato",
-    "role": "Product Designer",
-    "location": "Toronto, Canada"
+    "quote": "It turned a simple welcome pack into something students wanted to show their families.",
+    "name": "Daniel Park",
+    "role": "Admissions consultant",
+    "location": "Vancouver, Canada"
   },
   {
-    "quote": "We used it on product packaging and customers understood the story in seconds.",
+    "quote": "Our product card finally carried the story, not just the SKU and a barcode.",
     "name": "Maya Olsson",
-    "role": "Founder",
+    "role": "Studio founder",
     "location": "Stockholm, Sweden"
   }
 ]

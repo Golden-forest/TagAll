@@ -5,23 +5,23 @@
   },
   {
     "question": "Can I update the page after launch?",
-    "answer": "Yes. Mirra experiences are designed to stay editable after launch."
+    "answer": "Yes. The digital gift page can stay editable after launch for photos, links, copy, and dates."
+  },
+  {
+    "question": "Can this be used for admission letters?",
+    "answer": "Yes. Mirra can support chip-enabled admission letters, welcome cards, and campus onboarding pages."
   },
   {
     "question": "Does it work with both NFC and QR?",
     "answer": "Yes. Every experience can support tap-to-open NFC and scan-to-open QR entry."
   },
   {
-    "question": "Can you ship globally?",
-    "answer": "Yes. Digital pages can launch anywhere, and NFC cards can be shipped internationally."
-  },
-  {
     "question": "Can I request a fully custom design?",
-    "answer": "Yes. Mirra supports template-guided experiences and bespoke pages for special projects."
+    "answer": "Yes. Mirra is built for premium private custom work, from one-off gifts to institutional programs."
   },
   {
-    "question": "Can this be used for businesses or products?",
-    "answer": "Yes. Product showcases, business cards, portfolios, event pages, and QR campaigns are core use cases."
+    "question": "Can the card be part of a physical gift?",
+    "answer": "Yes. The digital page can be paired with NFC cards, printed pieces, packaging, or custom gift boxes."
   },
   {
     "question": "What happens if the NFC card is lost?",
@@ -29,6 +29,6 @@
   },
   {
     "question": "How long does a custom project take?",
-    "answer": "Simple experiences can be prepared quickly after assets are received. Bespoke projects are scoped before production."
+    "answer": "Simple gift pages can be prepared quickly after assets are received. Institutional projects are scoped before production."
   }
 ]

@@ -1,18 +1,18 @@
 [
   {
     "title": "Choose",
-    "description": "Pick a use case or start from a blank brief."
+    "description": "Select a gift card, private page, cultural product, or admission-letter format."
   },
   {
     "title": "Customize",
-    "description": "Add photos, text, links, style, and personal details."
+    "description": "Add the message, visuals, institution identity, recipient details, and launch flow."
   },
   {
     "title": "Generate",
-    "description": "Mirra builds the experience with AI and human-quality polish."
+    "description": "Mirra builds a polished digital page with AI assistance and design review."
   },
   {
     "title": "Receive",
-    "description": "Get a live page, QR link, and optional NFC card shipped worldwide."
+    "description": "Receive the live page, QR entry, and optional NFC card or chip-enabled package."
   }
 ]
