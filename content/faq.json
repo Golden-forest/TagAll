@@ -1,0 +1,34 @@
+[
+  {
+    "question": "Do customers need an app?",
+    "answer": "No. Mirra experiences open in the browser through NFC, QR, or a normal link."
+  },
+  {
+    "question": "Can I update the page after launch?",
+    "answer": "Yes. Mirra experiences are designed to stay editable after launch."
+  },
+  {
+    "question": "Does it work with both NFC and QR?",
+    "answer": "Yes. Every experience can support tap-to-open NFC and scan-to-open QR entry."
+  },
+  {
+    "question": "Can you ship globally?",
+    "answer": "Yes. Digital pages can launch anywhere, and NFC cards can be shipped internationally."
+  },
+  {
+    "question": "Can I request a fully custom design?",
+    "answer": "Yes. Mirra supports template-guided experiences and bespoke pages for special projects."
+  },
+  {
+    "question": "Can this be used for businesses or products?",
+    "answer": "Yes. Product showcases, business cards, portfolios, event pages, and QR campaigns are core use cases."
+  },
+  {
+    "question": "What happens if the NFC card is lost?",
+    "answer": "The page remains online and can still be opened by QR or direct link."
+  },
+  {
+    "question": "How long does a custom project take?",
+    "answer": "Simple experiences can be prepared quickly after assets are received. Bespoke projects are scoped before production."
+  }
+]

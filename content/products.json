@@ -1,0 +1,56 @@
+[
+  {
+    "slug": "digital-album",
+    "title": "NFC Digital Album",
+    "description": "A private album that opens from a card, gift, or QR scan.",
+    "image": "/mirra/product-digital-album.webp"
+  },
+  {
+    "slug": "business-card",
+    "title": "Digital Business Card",
+    "description": "A polished professional profile with contacts, links, and work.",
+    "image": "/mirra/product-business-card.webp"
+  },
+  {
+    "slug": "wedding-invitation",
+    "title": "Wedding Invitation",
+    "description": "A living invitation with story, schedule, gallery, and RSVP links.",
+    "image": "/mirra/product-wedding.webp"
+  },
+  {
+    "slug": "pet-memorial",
+    "title": "Pet Memorial",
+    "description": "A gentle place for photos, stories, dates, and shared memories.",
+    "image": "/mirra/product-pet-memorial.webp"
+  },
+  {
+    "slug": "product-showcase",
+    "title": "Product Showcase",
+    "description": "A compact product page for launches, packaging, events, and retail.",
+    "image": "/mirra/product-showcase.webp"
+  },
+  {
+    "slug": "portfolio",
+    "title": "Portfolio",
+    "description": "A refined personal site for creators, founders, designers, and artists.",
+    "image": "/mirra/product-portfolio.webp"
+  },
+  {
+    "slug": "resume",
+    "title": "Resume",
+    "description": "A premium career page that travels through QR, NFC, and link sharing.",
+    "image": "/mirra/product-resume.webp"
+  },
+  {
+    "slug": "qr-landing-page",
+    "title": "QR Landing Page",
+    "description": "A focused campaign page for events, menus, packaging, and promos.",
+    "image": "/mirra/product-qr-landing.webp"
+  },
+  {
+    "slug": "custom-web-experience",
+    "title": "Custom Web Experience",
+    "description": "A bespoke page built around a person, product, place, or moment.",
+    "image": "/mirra/product-custom.webp"
+  }
+]

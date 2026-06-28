@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Family Memory Album",
+    "category": "Memories",
+    "image": "/mirra/gallery-memory.webp",
+    "description": "A private story page for photos, audio notes, and shared milestones."
+  },
+  {
+    "title": "Coastal Wedding Invite",
+    "category": "Weddings",
+    "image": "/mirra/gallery-wedding.webp",
+    "description": "A cinematic invitation with schedule, gallery, and travel details."
+  },
+  {
+    "title": "Pet Memorial Page",
+    "category": "Pets",
+    "image": "/mirra/gallery-pet.webp",
+    "description": "A gentle digital keepsake that opens from a small NFC card."
+  },
+  {
+    "title": "Creator Portfolio",
+    "category": "Creators",
+    "image": "/mirra/gallery-creator.webp",
+    "description": "A fast personal site for work, press links, and contact."
+  },
+  {
+    "title": "Studio Product Card",
+    "category": "Products",
+    "image": "/mirra/gallery-product.webp",
+    "description": "A product story opened from packaging, retail displays, or events."
+  },
+  {
+    "title": "Launch Event Pass",
+    "category": "Events",
+    "image": "/mirra/gallery-event.webp",
+    "description": "A QR and NFC landing page for schedules, maps, and updates."
+  }
+]
