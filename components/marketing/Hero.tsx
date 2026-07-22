@@ -1,54 +1,32 @@
 import siteContent from '@/content/site.json'
 import { HeroDeviceHover } from './HeroDeviceHover'
-import { MagneticButton } from './MagneticButton'
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden px-5 pb-6 pt-20 sm:px-8">
-      <div className="mx-auto grid min-h-[calc(100dvh-8rem)] max-w-7xl items-start gap-10 py-8 lg:grid-cols-[0.9fr_1.1fr] lg:py-10">
-        <div className="max-w-2xl">
-          <p className="hero-intro mb-6 inline-flex rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs font-medium text-[var(--mirra-muted)] shadow-sm backdrop-blur">
-            Premium private gifts and cultural NFC experiences
-          </p>
+    <section className="px-5 pb-16 pt-24 sm:px-8 sm:pb-24">
+      <div className="mx-auto grid min-h-[calc(100dvh-6rem)] max-w-7xl items-center gap-12 py-8 lg:grid-cols-12 lg:gap-8 lg:py-10">
+        <div className="max-w-2xl lg:col-span-5">
           <h1
-            className="hero-intro text-5xl font-semibold leading-[0.98] text-[var(--mirra-ink)] sm:text-6xl lg:text-7xl"
-            style={{ animationDelay: '90ms' }}
+            className="hero-intro max-w-[9ch] text-[clamp(3.6rem,7.2vw,6.35rem)] font-semibold leading-[0.91] tracking-[-0.07em] text-[var(--tagall-ink)]"
           >
             {siteContent.tagline}
           </h1>
           <p
-            className="hero-intro mt-6 max-w-xl text-lg leading-8 text-[var(--mirra-muted)]"
-            style={{ animationDelay: '180ms' }}
+            className="hero-intro mt-7 max-w-[31rem] text-lg leading-8 text-[var(--tagall-muted)]"
+            style={{ animationDelay: '100ms' }}
           >
             {siteContent.description}
           </p>
-          <div className="hero-intro mt-8 flex flex-wrap gap-3" style={{ animationDelay: '270ms' }}>
-            <MagneticButton href={siteContent.primaryCta.href} variant="primary">
+          <div className="hero-intro mt-9 flex flex-wrap items-center gap-5" style={{ animationDelay: '180ms' }}>
+            <a href={siteContent.primaryCta.href} className="inline-flex whitespace-nowrap rounded-full bg-[var(--tagall-accent)] px-6 py-3.5 text-sm font-medium text-[var(--tagall-on-accent)] transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--tagall-accent-hover)] active:translate-y-0">
               {siteContent.primaryCta.label}
-            </MagneticButton>
-            <MagneticButton href={siteContent.secondaryCta.href} variant="secondary">
+            </a>
+            <a href={siteContent.secondaryCta.href} className="inline-flex whitespace-nowrap border-b border-[var(--tagall-hairline)] py-2 text-sm font-medium text-[var(--tagall-ink)] transition-colors hover:border-[var(--tagall-accent)] hover:text-[var(--tagall-accent)]">
               {siteContent.secondaryCta.label}
-            </MagneticButton>
-          </div>
-          <div
-            className="hero-intro mt-10 grid max-w-xl grid-cols-3 gap-3 text-sm text-[var(--mirra-muted)]"
-            style={{ animationDelay: '360ms' }}
-          >
-            <div className="rounded-2xl border border-black/10 bg-white/60 p-4 backdrop-blur">
-              <p className="font-mono text-lg text-[var(--mirra-ink)]">01</p>
-              <p className="mt-2">Private gift pages</p>
-            </div>
-            <div className="rounded-2xl border border-black/10 bg-white/60 p-4 backdrop-blur">
-              <p className="font-mono text-lg text-[var(--mirra-ink)]">02</p>
-              <p className="mt-2">University packs</p>
-            </div>
-            <div className="rounded-2xl border border-black/10 bg-white/60 p-4 backdrop-blur">
-              <p className="font-mono text-lg text-[var(--mirra-ink)]">03</p>
-              <p className="mt-2">NFC + QR entry</p>
-            </div>
+            </a>
           </div>
         </div>
-        <HeroDeviceHover />
+        <div className="lg:col-span-7 lg:pl-5"><HeroDeviceHover /></div>
       </div>
     </section>
   )

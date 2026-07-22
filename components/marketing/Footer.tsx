@@ -2,52 +2,46 @@ import siteContent from '@/content/site.json'
 
 export function Footer() {
   return (
-    <footer id="footer" className="border-t border-black/10 bg-white/60">
-      <section id="pricing" className="border-b border-black/10 py-12">
-        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 sm:px-8 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <h2 className="text-3xl font-semibold leading-tight text-[var(--mirra-ink)]">
-              Custom gift programs are scoped before production.
+    <footer id="footer" className="border-t border-[var(--tagall-hairline)] bg-[var(--tagall-surface)]">
+      <section id="pricing" className="border-b border-[var(--tagall-hairline)] py-16 sm:py-20">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:px-8 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-8">
+            <h2 className="max-w-3xl text-4xl font-semibold leading-[1.02] tracking-[-0.05em] text-[var(--tagall-ink)] sm:text-6xl">
+              Make the next tap worth keeping.
             </h2>
-            <p className="mt-3 max-w-xl text-sm leading-6 text-[var(--mirra-muted)]">
-              Explore demos first, then send a brief for a private gift, cultural product, or admission-letter program.
+            <p className="mt-5 max-w-xl text-base leading-7 text-[var(--tagall-muted)]">
+              We shape the page, physical tag, and tap flow around your person, event, or product.
             </p>
           </div>
-          <a
-            className="inline-flex w-fit whitespace-nowrap rounded-full bg-[var(--mirra-ink)] px-5 py-3 text-sm font-medium text-white"
-            href={siteContent.primaryCta.href}
-          >
-            {siteContent.primaryCta.label}
-          </a>
-        </div>
-      </section>
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[1fr_1.4fr]">
-        <div>
-          <p className="text-lg font-semibold text-[var(--mirra-ink)]">{siteContent.brand}</p>
-          <p className="mt-3 max-w-sm text-sm leading-6 text-[var(--mirra-muted)]">
-            Premium virtual gift cards and NFC-enabled digital experiences for private clients, cultural brands, and universities.
-          </p>
-          <a className="mt-5 inline-flex text-sm font-medium text-[var(--mirra-ink)]" href={`mailto:${siteContent.contact.email}`}>
-            {siteContent.contact.email}
-          </a>
-          <div className="mt-6 flex flex-wrap gap-3">
-            {siteContent.socialLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="rounded-full border border-black/10 px-3 py-1.5 text-xs font-medium text-[var(--mirra-muted)] transition hover:text-[var(--mirra-ink)]"
-              >
-                {link.label}
-              </a>
-            ))}
+          <div className="lg:col-span-4 lg:flex lg:justify-end">
+            <a
+              className="inline-flex w-fit whitespace-nowrap rounded-full bg-[var(--tagall-accent)] px-6 py-3.5 text-sm font-medium text-[var(--tagall-on-accent)] transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--tagall-accent-hover)] active:translate-y-0"
+              href={siteContent.primaryCta.href}
+            >
+              {siteContent.primaryCta.label}
+            </a>
           </div>
         </div>
-        <nav className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      </section>
+      <div className="mx-auto grid max-w-7xl gap-12 px-5 py-12 sm:px-8 lg:grid-cols-12">
+        <div className="lg:col-span-5">
+          <p className="text-xl font-semibold tracking-[-0.045em] text-[var(--tagall-ink)]">{siteContent.brand}</p>
+          <p className="mt-4 max-w-sm text-sm leading-6 text-[var(--tagall-muted)]">
+            Designed NFC and QR experiences for people, pets, careers, events, and products.
+          </p>
+          <a
+            className="mt-6 inline-flex border-b border-[var(--tagall-hairline)] pb-1 text-sm font-medium text-[var(--tagall-ink)] transition-colors hover:border-[var(--tagall-accent)] hover:text-[var(--tagall-accent)]"
+            href={`mailto:${siteContent.contact.email}`}
+          >
+            {siteContent.contact.email}
+          </a>
+        </div>
+        <nav className="grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3 lg:col-span-6 lg:col-start-7">
           {siteContent.footerLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-sm text-[var(--mirra-muted)] transition hover:text-[var(--mirra-ink)]"
+              className="text-sm text-[var(--tagall-muted)] transition-colors hover:text-[var(--tagall-accent)]"
             >
               {link.label}
             </a>

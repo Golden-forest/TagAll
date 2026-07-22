@@ -1,7 +1,7 @@
 [
   {
     "question": "Do customers need an app?",
-    "answer": "No. Mirra experiences open in the browser through NFC, QR, or a normal link."
+    "answer": "No. TagAll experiences open in the browser through NFC, QR, or a normal link."
   },
   {
     "question": "Can I update the page after launch?",
@@ -9,7 +9,7 @@
   },
   {
     "question": "Can this be used for admission letters?",
-    "answer": "Yes. Mirra can support chip-enabled admission letters, welcome cards, and campus onboarding pages."
+    "answer": "Yes. TagAll can support chip-enabled invitations, welcome cards, and private event pages."
   },
   {
     "question": "Does it work with both NFC and QR?",
@@ -17,7 +17,7 @@
   },
   {
     "question": "Can I request a fully custom design?",
-    "answer": "Yes. Mirra is built for premium private custom work, from one-off gifts to institutional programs."
+    "answer": "Yes. TagAll is built for custom work, from one-off personal pages to branded programs."
   },
   {
     "question": "Can the card be part of a physical gift?",

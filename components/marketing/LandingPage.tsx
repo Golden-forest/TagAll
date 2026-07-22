@@ -6,21 +6,19 @@ import { Hero } from './Hero'
 import { HowItWorksTimeline } from './HowItWorksTimeline'
 import { LiveDemo } from './LiveDemo'
 import { ProductShowcase } from './ProductShowcase'
-import { SmoothScroll } from './SmoothScroll'
 import { Testimonials } from './Testimonials'
-import { WhyMirra } from './WhyMirra'
+import { WhyTagAll } from './WhyTagAll'
 
 export function LandingPage() {
   return (
     <>
-      <SmoothScroll />
       <Header />
       <main>
         <Hero />
         <LiveDemo />
         <ProductShowcase />
         <HowItWorksTimeline />
-        <WhyMirra />
+        <WhyTagAll />
         <GalleryMasonry />
         <Testimonials />
         <FAQAccordion />

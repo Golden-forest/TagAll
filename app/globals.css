@@ -13,18 +13,21 @@
 }
 
 :root {
-  --mirra-bg: #f7f8f7;
-  --mirra-surface: #fbfcfd;
-  --mirra-surface-strong: #ffffff;
-  --mirra-surface-soft: #eef1f4;
-  --mirra-ink: #111318;
-  --mirra-muted: #5e6673;
-  --mirra-faint: #8a929f;
-  --mirra-hairline: rgba(17, 19, 24, 0.1);
-  --mirra-accent: #476cff;
-  --mirra-accent-soft: rgba(71, 108, 255, 0.12);
-  --mirra-shadow: 0 24px 80px rgba(17, 19, 24, 0.12);
-  --mirra-radius: 22px;
+  color-scheme: light dark;
+  --tagall-bg: #f4f5f7;
+  --tagall-surface: #f9fafb;
+  --tagall-surface-strong: #fcfcfd;
+  --tagall-surface-soft: #e9ecf1;
+  --tagall-ink: #17191e;
+  --tagall-muted: #5c6370;
+  --tagall-faint: #7d8591;
+  --tagall-hairline: rgba(23, 25, 30, 0.13);
+  --tagall-accent: #3157d5;
+  --tagall-accent-hover: #2648ba;
+  --tagall-accent-soft: rgba(49, 87, 213, 0.1);
+  --tagall-on-accent: #f7f8ff;
+  --tagall-shadow: 0 18px 52px rgba(34, 43, 70, 0.11);
+  --tagall-radius: 16px;
 }
 
 html,
@@ -34,24 +37,19 @@ body {
   width: 100%;
   overflow-x: hidden;
   scroll-behavior: auto;
-  background:
-    radial-gradient(circle at 72% 12%, rgba(71, 108, 255, 0.08), transparent 28rem),
-    linear-gradient(180deg, #fbfcfd 0%, var(--mirra-bg) 42%, #f1f3f5 100%);
-  color: var(--mirra-ink);
+  background: var(--tagall-bg);
+  color: var(--tagall-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-html[data-mirra-route='legacy'] [data-marketing-root] {
-  display: none;
-}
-
 body {
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: -0.012em;
 }
 
 ::selection {
-  background: rgba(71, 108, 255, 0.18);
+  background: rgba(49, 87, 213, 0.2);
 }
 
 button,
@@ -63,27 +61,20 @@ button {
   font: inherit;
 }
 
+a,
+button {
+  outline-color: var(--tagall-accent);
+  outline-offset: 4px;
+}
+
 @keyframes loaderDot {
   0%, 80%, 100% { transform: scale(.4); opacity: .3 }
   40% { transform: scale(1); opacity: 1 }
 }
 
-@keyframes breathe {
-  0%, 100% { opacity: 0.3; transform: scale(0.6) translateY(-8px) translateX(-4px); }
-  50% { opacity: 0.7; transform: scale(1.3) translateY(8px) translateX(4px); }
-}
-
 @keyframes errorIn {
   from { opacity: 0; transform: translate3d(0, 18px, 0); filter: blur(8px); }
   to { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
-}
-
-.ambient-glow {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  will-change: opacity, transform;
-  animation: breathe 6s ease-in-out infinite;
 }
 
 @keyframes heroIntro {
@@ -109,8 +100,7 @@ button {
 }
 
 .hero-media {
-  transform: scale(1.04);
-  will-change: transform;
+  opacity: 1;
 }
 
 .image-reveal img {
@@ -118,23 +108,19 @@ button {
   will-change: transform;
 }
 
-.mirra-glass {
-  border: 1px solid rgba(17, 19, 24, 0.08);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.48)),
-    rgba(255, 255, 255, 0.58);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.78),
-    0 18px 60px rgba(17, 19, 24, 0.1);
-  backdrop-filter: blur(22px) saturate(160%);
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
+.tagall-glass {
+  border: 1px solid var(--tagall-hairline);
+  background: color-mix(in srgb, var(--tagall-surface-strong) 88%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
 }
 
-.mirra-scrollbar {
+.tagall-scrollbar {
   scrollbar-width: none;
 }
 
-.mirra-scrollbar::-webkit-scrollbar {
+.tagall-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
@@ -150,11 +136,36 @@ button {
 
   .reveal,
   .hero-intro,
-  .hero-media,
-  .ambient-glow {
+  .hero-media {
     opacity: 1;
     animation: none;
     transform: none;
     filter: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tagall-bg: #111318;
+    --tagall-surface: #16191f;
+    --tagall-surface-strong: #1b1e25;
+    --tagall-surface-soft: #232730;
+    --tagall-ink: #eef0f4;
+    --tagall-muted: #afb5c0;
+    --tagall-faint: #8e96a3;
+    --tagall-hairline: rgba(238, 240, 244, 0.14);
+    --tagall-accent: #86a0ff;
+    --tagall-accent-hover: #a5b6ff;
+    --tagall-accent-soft: rgba(134, 160, 255, 0.13);
+    --tagall-on-accent: #101522;
+    --tagall-shadow: 0 20px 64px rgba(0, 0, 0, 0.28);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .tagall-glass {
+    background: var(--tagall-surface-strong);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }

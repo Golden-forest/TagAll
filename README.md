@@ -1,73 +1,40 @@
-# React + TypeScript + Vite
+# TagAll
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TagAll turns an NFC tag, physical card, or QR code into a designed digital experience. The repository contains the public TagAll homepage, seven live demos, and the original personalized 2307 graduation memory experience.
 
-Currently, two official plugins are available:
+## Live cases
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Graduation memory: `/#/s/:slug`
+- Smart pet tag: `/demos/smart-pet-tag`
+- Digital business card: `/demos/digital-business-card`
+- Portrait story: `/demos/portrait-story`
+- Interactive resume: `/demos/interactive-resume`
+- Wedding invitation: `/demos/wedding-invitation`
+- Creator product story: `/demos/creator-product-story`
 
-## React Compiler
+## Local development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:3000](http://localhost:3000).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Verification
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run validate:content
+npm run lint
+npm run build
 ```
+
+## Stack
+
+- Next.js App Router
+- React and TypeScript
+- Tailwind CSS
+- Motion, GSAP, and Lenis
+- Static content and optimized WebP assets
+
+The demo routes are statically generated. The original student experience remains available through the legacy hash route so existing NFC tags continue to work.

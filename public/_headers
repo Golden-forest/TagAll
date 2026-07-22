@@ -7,5 +7,5 @@
 /mirra/*
   Cache-Control: public, max-age=31536000, immutable
 
-/photos/*
+/demo-assets/*
   Cache-Control: public, max-age=31536000, immutable

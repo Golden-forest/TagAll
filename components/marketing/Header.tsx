@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { List, X } from '@phosphor-icons/react'
 import { useState } from 'react'
 import siteContent from '@/content/site.json'
 
@@ -9,25 +8,22 @@ export function Header() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-40 border-b border-black/5 bg-[rgba(247,248,247,0.76)] backdrop-blur-xl">
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-[var(--tagall-hairline)] bg-[color-mix(in_srgb,var(--tagall-bg)_84%,transparent)] backdrop-blur-xl">
+      <nav className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8">
         <Link
           href="/"
-          className="flex items-center gap-2 text-sm font-semibold text-[var(--mirra-ink)]"
+          className="text-lg font-semibold tracking-[-0.045em] text-[var(--tagall-ink)]"
           onClick={() => setOpen(false)}
         >
-          <span className="grid h-7 w-7 place-items-center rounded-full border border-black/10 bg-white shadow-sm">
-            <span className="h-2.5 w-2.5 rounded-full bg-[var(--mirra-ink)]" />
-          </span>
           {siteContent.brand}
         </Link>
 
-        <div className="hidden items-center gap-7 lg:flex">
+        <div className="hidden items-center gap-8 lg:flex">
           {siteContent.nav.map((item) => (
             <a
-              key={item.href}
+              key={item.label}
               href={item.href}
-              className="text-sm text-[var(--mirra-muted)] transition hover:text-[var(--mirra-ink)]"
+              className="text-sm text-[var(--tagall-muted)] transition-colors duration-300 hover:text-[var(--tagall-accent)]"
             >
               {item.label}
             </a>
@@ -37,7 +33,7 @@ export function Header() {
         <div className="hidden items-center gap-4 lg:flex">
           <a
             href={siteContent.primaryCta.href}
-            className="inline-flex rounded-full bg-[var(--mirra-ink)] px-4 py-2 text-sm font-medium text-white shadow-sm transition duration-300 hover:-translate-y-0.5"
+            className="inline-flex whitespace-nowrap rounded-full bg-[var(--tagall-accent)] px-5 py-2.5 text-sm font-medium text-[var(--tagall-on-accent)] transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--tagall-accent-hover)] active:translate-y-0"
           >
             {siteContent.primaryCta.label}
           </a>
@@ -45,25 +41,26 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white text-[var(--mirra-ink)] shadow-sm lg:hidden"
+          className="inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--tagall-hairline)] bg-[var(--tagall-surface-strong)] px-4 text-sm font-medium text-[var(--tagall-ink)] lg:hidden"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           onClick={() => setOpen((value) => !value)}
         >
-          {open ? <X size={18} /> : <List size={18} />}
+          {open ? 'Close' : 'Menu'}
         </button>
       </nav>
 
       <div
-        className={`lg:hidden ${open ? 'grid grid-rows-[1fr]' : 'grid grid-rows-[0fr]'} border-t border-black/5 bg-[rgba(247,248,247,0.92)] transition-all duration-300`}
+        aria-hidden={!open}
+        className={`lg:hidden ${open ? 'visible grid grid-rows-[1fr]' : 'invisible grid grid-rows-[0fr]'} border-t border-[var(--tagall-hairline)] bg-[var(--tagall-bg)] transition-all duration-300`}
       >
         <div className="overflow-hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4 sm:px-8">
             {siteContent.nav.map((item) => (
               <a
-                key={item.href}
+                key={item.label}
                 href={item.href}
-                className="rounded-2xl px-3 py-3 text-sm font-medium text-[var(--mirra-muted)] transition hover:bg-white hover:text-[var(--mirra-ink)]"
+                className="rounded-[var(--tagall-radius)] px-3 py-3 text-sm font-medium text-[var(--tagall-muted)] transition hover:bg-[var(--tagall-surface-strong)] hover:text-[var(--tagall-ink)]"
                 onClick={() => setOpen(false)}
               >
                 {item.label}
@@ -71,7 +68,7 @@ export function Header() {
             ))}
             <a
               href={siteContent.primaryCta.href}
-              className="mt-2 inline-flex w-fit rounded-full bg-[var(--mirra-ink)] px-5 py-3 text-sm font-medium text-white"
+              className="mt-2 inline-flex w-fit rounded-full bg-[var(--tagall-accent)] px-5 py-3 text-sm font-medium text-[var(--tagall-on-accent)]"
               onClick={() => setOpen(false)}
             >
               {siteContent.primaryCta.label}

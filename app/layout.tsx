@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next'
-import Script from 'next/script'
 import { Geist, Geist_Mono } from 'next/font/google'
 import siteContent from '@/content/site.json'
 import './globals.css'
@@ -17,7 +16,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mirra.studio'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
   title: siteContent.seo.title,
   description: siteContent.seo.description,
   alternates: {
@@ -39,12 +38,18 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+  },
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#f7f8f7',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f4f5f7' },
+    { media: '(prefers-color-scheme: dark)', color: '#111318' },
+  ],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -58,11 +63,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   }
 
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <body>
-        <Script id="mirra-legacy-hash-guard" strategy="beforeInteractive">
-          {`if (window.location.hash.indexOf('#/s/') === 0) { document.documentElement.dataset.mirraRoute = 'legacy'; }`}
-        </Script>
         <script
           type="application/ld+json"
           suppressHydrationWarning
