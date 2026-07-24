@@ -3,13 +3,16 @@
 import { useEffect, useRef, useState } from 'react'
 
 /**
- * Apple StandBy 风格时钟 — v4
+ * Apple StandBy 风格时钟 — v6 "精密排版"
  *
  * 改进：
- * 1. 精确到秒 HH:MM:SS，同一行显示
- * 2. 去掉 next/font，改用系统字体栈（解决 iPad 文字不可见）
- * 3. 保留冒号呼吸动效
- * 4. 24小时制固定
+ * 1. 字体从比例字体栈改为 SF Mono 等宽字体栈
+ * 2. 横屏字号大幅提升，删除 15vh 限制
+ * 3. 冒号极细化（weight 200 + 降透明度）
+ * 4. 字间距从 -0.05em 翻转为 0.06em（呼吸感）
+ * 5. 星期/日期两侧增加 1px 细线分隔
+ * 6. Pearl 主题改为描边风格（数字描边/日期实体）
+ * 保留：HH:MM:SS 同等大小、交叉淡入、冒号呼吸、防烧屏、纯黑背景
  */
 
 type ThemeName = 'crimson' | 'amber' | 'pearl' | 'azure'
@@ -17,48 +20,35 @@ type ThemeName = 'crimson' | 'amber' | 'pearl' | 'azure'
 interface Theme {
   fg: string
   glow: string
-  halo: string
-  bgCenter: string
-  bgEdge: string
   dateColor: string
   colonColor: string
+  outline?: boolean
 }
 
 const THEMES: Record<ThemeName, Theme> = {
   crimson: {
-    fg: 'rgba(255, 138, 128, 1)',
-    glow: 'rgba(255, 95, 87, 0.5)',
-    halo: 'rgba(255, 60, 50, 0.06)',
-    bgCenter: 'rgba(28, 6, 8, 1)',
-    bgEdge: 'rgba(0, 0, 0, 1)',
-    dateColor: 'rgba(255, 138, 128, 0.35)',
+    fg: 'rgba(255, 120, 110, 1)',
+    glow: 'rgba(255, 100, 90, 0.5)',
+    dateColor: 'rgba(255, 158, 148, 0.85)',
     colonColor: 'rgba(255, 138, 128, 0.5)',
   },
   amber: {
-    fg: 'rgba(255, 205, 130, 1)',
-    glow: 'rgba(255, 175, 60, 0.45)',
-    halo: 'rgba(255, 155, 30, 0.05)',
-    bgCenter: 'rgba(26, 19, 6, 1)',
-    bgEdge: 'rgba(0, 0, 0, 1)',
-    dateColor: 'rgba(255, 205, 130, 0.35)',
+    fg: 'rgba(255, 200, 110, 1)',
+    glow: 'rgba(255, 180, 65, 0.45)',
+    dateColor: 'rgba(255, 215, 145, 0.85)',
     colonColor: 'rgba(255, 205, 130, 0.48)',
   },
   pearl: {
     fg: 'rgba(240, 240, 245, 1)',
     glow: 'rgba(255, 255, 255, 0.15)',
-    halo: 'rgba(255, 255, 255, 0.03)',
-    bgCenter: 'rgba(14, 14, 18, 1)',
-    bgEdge: 'rgba(0, 0, 0, 1)',
-    dateColor: 'rgba(240, 240, 245, 0.32)',
+    dateColor: 'rgba(240, 240, 245, 0.75)',
     colonColor: 'rgba(240, 240, 245, 0.45)',
+    outline: true,
   },
   azure: {
-    fg: 'rgba(145, 210, 255, 1)',
-    glow: 'rgba(80, 165, 255, 0.4)',
-    halo: 'rgba(50, 130, 255, 0.04)',
-    bgCenter: 'rgba(6, 14, 28, 1)',
-    bgEdge: 'rgba(0, 0, 0, 1)',
-    dateColor: 'rgba(145, 210, 255, 0.35)',
+    fg: 'rgba(130, 200, 255, 1)',
+    glow: 'rgba(85, 170, 255, 0.4)',
+    dateColor: 'rgba(165, 220, 255, 0.85)',
     colonColor: 'rgba(145, 210, 255, 0.48)',
   },
 }
@@ -101,7 +91,7 @@ function formatDate(date: Date): { weekday: string; dateStr: string } {
 // - 不使用 blur，避免每秒闪一下的刺眼感
 // - 纯 CSS transition 控制，无 JS 定时器
 
-function Digit({ char, color, glow, lowPerf }: { char: string; color: string; glow: string; lowPerf: boolean }) {
+function Digit({ char, color, glow, lowPerf, outline }: { char: string; color: string; glow: string; lowPerf: boolean; outline?: boolean }) {
   const [current, setCurrent] = useState(char)
   const [prev, setPrev] = useState<string | null>(null)
   const [isAnimating, setIsAnimating] = useState(false)
@@ -119,13 +109,22 @@ function Digit({ char, color, glow, lowPerf }: { char: string; color: string; gl
     }
   }, [char, current])
 
-  // 光影策略：
-  // - 高性能设备：text-shadow 三层光晕
-  // - 低端设备（A8/A9 芯片等）：完全禁用，纯色显示
-  //   原因：A8 GPU 处理多层 text-shadow blur 时会渲染失败，文字直接消失
-  const shadow = lowPerf
-    ? 'none'
-    : `0 0 8px ${glow}, 0 0 24px ${glow.replace(/[\d.]+\)$/, '0.18)')}, 0 0 60px ${glow.replace(/[\d.]+\)$/, '0.08)')}`
+  // 光影策略（v5 "克制精工"）：
+  // - 用极轻微 0.5px 锐利描边替代三层 text-shadow blur
+  // - 开销极低，无需 lowPerf 降级
+  const shadow = `0 0 0.5px ${glow.replace(/[\d.]+\)$/, '0.5)')}`
+
+  const textStyle: React.CSSProperties = outline
+    ? {
+        color: 'transparent',
+        WebkitTextFillColor: 'transparent',
+        WebkitTextStroke: '1px rgba(240, 240, 245, 0.7)',
+      }
+    : {
+        color,
+        WebkitTextFillColor: color,
+        textShadow: shadow,
+      }
 
   return (
     <span className="digit-slot">
@@ -133,7 +132,7 @@ function Digit({ char, color, glow, lowPerf }: { char: string; color: string; gl
       {prev !== null && (
         <span
           className="digit-layer digit-out"
-          style={{ color, WebkitTextFillColor: color, textShadow: shadow }}
+          style={textStyle}
         >
           {prev}
         </span>
@@ -141,7 +140,7 @@ function Digit({ char, color, glow, lowPerf }: { char: string; color: string; gl
       {/* 新数字 — 从下滑入 + 淡入 */}
       <span
         className={`digit-layer digit-current ${isAnimating ? 'digit-in' : ''}`}
-        style={{ color, WebkitTextFillColor: color, textShadow: shadow }}
+        style={textStyle}
       >
         {current}
       </span>
@@ -261,8 +260,9 @@ export default function StandByClock() {
   const colonStyle: React.CSSProperties = {
     color: theme.colonColor,
     WebkitTextFillColor: theme.colonColor,
-    textShadow: lowPerf ? 'none' : `0 0 6px ${theme.glow.replace(/[\d.]+\)$/, '0.3)')}, 0 0 20px ${theme.glow.replace(/[\d.]+\)$/, '0.1)')}`,
+    textShadow: `0 0 0.5px ${theme.glow.replace(/[\d.]+\)$/, '0.3)')}`,
     opacity: colonVisible ? 0.75 : 0.2,
+    fontWeight: 200,
   }
 
   return (
@@ -275,40 +275,38 @@ export default function StandByClock() {
       </head>
 
       <div className="clock-screen" onClick={handleScreenTap}>
-        {/* 背景层 — 从上方微弱照射的环境光 */}
-        <div className="clock-bg-layer" style={{
-          background: `radial-gradient(ellipse 100% 70% at 50% 0%, ${theme.bgCenter} 0%, ${theme.bgEdge} 60%)`,
-        }} />
-        <div className="clock-vignette" />
-        {/* 极微弱的环境光晕 — 不在正中央，偏上方 */}
-        <div className="clock-halo" style={{
-          background: `radial-gradient(ellipse 60% 40% at 50% 35%, ${theme.halo} 0%, transparent 70%)`,
-        }} />
-
         {/* 防烧屏漂移 */}
         <div className="clock-drift">
           <div className={`clock-content ${mounted ? 'visible' : ''}`}>
             {/* 星期 */}
-            <p className="clock-weekday" style={{ color: theme.dateColor, WebkitTextFillColor: theme.dateColor }}>
-              {dateInfo.weekday}
-            </p>
+            <div className="clock-meta-line">
+              <span className="meta-line" style={{ background: theme.dateColor, opacity: 0.4 }} />
+              <p className="clock-weekday" style={{ color: theme.dateColor, WebkitTextFillColor: theme.dateColor }}>
+                {dateInfo.weekday}
+              </p>
+              <span className="meta-line" style={{ background: theme.dateColor, opacity: 0.4 }} />
+            </div>
 
             {/* 时间 HH:MM:SS — 同一行，flexbox 对齐 */}
             <div className="clock-time" ref={containerRef}>
-              <Digit char={time.h1} color={theme.fg} glow={theme.glow} lowPerf={lowPerf} />
-              <Digit char={time.h2} color={theme.fg} glow={theme.glow} lowPerf={lowPerf} />
+              <Digit char={time.h1} color={theme.fg} glow={theme.glow} lowPerf={lowPerf} outline={theme.outline} />
+              <Digit char={time.h2} color={theme.fg} glow={theme.glow} lowPerf={lowPerf} outline={theme.outline} />
               <span className="colon" style={colonStyle}>:</span>
-              <Digit char={time.m1} color={theme.fg} glow={theme.glow} lowPerf={lowPerf} />
-              <Digit char={time.m2} color={theme.fg} glow={theme.glow} lowPerf={lowPerf} />
+              <Digit char={time.m1} color={theme.fg} glow={theme.glow} lowPerf={lowPerf} outline={theme.outline} />
+              <Digit char={time.m2} color={theme.fg} glow={theme.glow} lowPerf={lowPerf} outline={theme.outline} />
               <span className="colon" style={colonStyle}>:</span>
-              <Digit char={time.s1} color={theme.fg} glow={theme.glow} lowPerf={lowPerf} />
-              <Digit char={time.s2} color={theme.fg} glow={theme.glow} lowPerf={lowPerf} />
+              <Digit char={time.s1} color={theme.fg} glow={theme.glow} lowPerf={lowPerf} outline={theme.outline} />
+              <Digit char={time.s2} color={theme.fg} glow={theme.glow} lowPerf={lowPerf} outline={theme.outline} />
             </div>
 
             {/* 日期 */}
-            <p className="clock-date" style={{ color: theme.dateColor, WebkitTextFillColor: theme.dateColor }}>
-              {dateInfo.dateStr}
-            </p>
+            <div className="clock-meta-line">
+              <span className="meta-line" style={{ background: theme.dateColor, opacity: 0.4 }} />
+              <p className="clock-date" style={{ color: theme.dateColor, WebkitTextFillColor: theme.dateColor }}>
+                {dateInfo.dateStr}
+              </p>
+              <span className="meta-line" style={{ background: theme.dateColor, opacity: 0.4 }} />
+            </div>
           </div>
         </div>
 
@@ -369,33 +367,6 @@ export default function StandByClock() {
           -webkit-transform: translateZ(0);
         }
 
-        .clock-bg-layer {
-          position: absolute;
-          inset: 0;
-          z-index: 0;
-          transition: background 1.2s ease;
-        }
-
-        .clock-vignette {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          background:
-            radial-gradient(ellipse 130% 110% at 50% 50%,
-              transparent 55%,
-              rgba(0,0,0,0.15) 80%,
-              rgba(0,0,0,0.5) 100%);
-          z-index: 1;
-        }
-
-        .clock-halo {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          z-index: 1;
-          transition: background 1.2s ease;
-        }
-
         .clock-drift {
           position: relative;
           z-index: 2;
@@ -422,13 +393,25 @@ export default function StandByClock() {
           transform: scale(1);
         }
 
+        .clock-meta-line {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: clamp(8px, 1.5vmin, 16px);
+        }
+        .meta-line {
+          width: clamp(20px, 3vmin, 40px);
+          height: 1px;
+          flex-shrink: 0;
+        }
+
         .clock-weekday {
-          font-size: clamp(0.7rem, 1.8vmin, 1rem);
-          font-weight: 600;
-          letter-spacing: 0.35em;
+          font-size: clamp(0.85rem, 2.4vmin, 1.3rem);
+          font-weight: 800;
+          letter-spacing: 0.3em;
           text-transform: uppercase;
-          margin-bottom: 0.1em;
-          padding-left: 0.35em;
+          margin-bottom: 0.15em;
+          padding-left: 0.3em;
         }
 
         /*
@@ -441,13 +424,13 @@ export default function StandByClock() {
           align-items: center;
           justify-content: center;
           font-weight: 900;
-          letter-spacing: -0.05em;
+          letter-spacing: 0.06em;
           line-height: 0.85;
           font-variant-numeric: tabular-nums;
-          font-size: clamp(3.5rem, 18vw, 16rem);
+          font-size: clamp(4rem, 18vw, 20rem);
           font-family:
-            -apple-system, BlinkMacSystemFont,
-            'SF Pro Display', 'SF Pro Text',
+            ui-rounded, -apple-system, BlinkMacSystemFont,
+            'SF Pro Rounded', 'SF Pro Display',
             'Helvetica Neue', 'Arial',
             'Segoe UI', Roboto, sans-serif;
         }
@@ -455,29 +438,29 @@ export default function StandByClock() {
         /* 横屏：根据高度限制 */
         @media (orientation: landscape) and (max-height: 500px) {
           .clock-time {
-            font-size: clamp(3rem, 15vh, 12rem);
+            font-size: clamp(4rem, min(72vh, 22vw), 20rem);
           }
           .clock-weekday {
-            font-size: clamp(0.6rem, 1.4vmin, 0.85rem);
-            margin-bottom: 0.08em;
+            font-size: clamp(0.6rem, 1.6vmin, 0.9rem);
+            margin-bottom: 0.12em;
           }
           .clock-date {
-            font-size: clamp(0.6rem, 1.4vmin, 0.85rem) !important;
-            margin-top: 0.15em !important;
+            font-size: clamp(0.6rem, 1.6vmin, 0.9rem) !important;
+            margin-top: 0.2em !important;
           }
         }
 
         /* iPad — 保证有足够大的字号 */
         @media (min-width: 768px) and (min-height: 768px) {
           .clock-time {
-            font-size: clamp(6rem, 14vw, 14rem);
+            font-size: clamp(6rem, 16vw, 20rem);
           }
         }
 
         /* 移动端竖屏 */
         @media (orientation: portrait) and (max-width: 500px) {
           .clock-time {
-            font-size: clamp(3.5rem, 21vw, 10rem);
+            font-size: clamp(4rem, 22vw, 14rem);
           }
         }
 
@@ -540,17 +523,17 @@ export default function StandByClock() {
           justify-content: center;
           margin: 0 -0.02em;
           padding: 0 0.02em;
-          font-weight: 800;
+          font-weight: 200;
           line-height: 0.85;
           transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .clock-date {
-          margin-top: 0.25em;
-          font-size: clamp(0.75rem, 2vmin, 1.05rem);
-          font-weight: 500;
-          letter-spacing: 0.12em;
-          padding-left: 0.12em;
+          margin-top: 0.3em;
+          font-size: clamp(0.85rem, 2.4vmin, 1.3rem);
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          padding-left: 0.15em;
         }
 
         .theme-dots {
