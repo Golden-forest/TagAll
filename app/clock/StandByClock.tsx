@@ -417,8 +417,19 @@ export default function StandByClock() {
         /*
          * HH:MM:SS 时间排版
          * 8 个字符（6数字 + 2冒号）铺满一行
-         * 系统字体栈：Apple 设备优先 SF Pro，其他设备回退
+         *
+         * 字体策略：同名 @font-face 替换
+         * - Apple 设备：浏览器优先用真实系统 SF Pro Rounded（系统字体 > @font-face）
+         * - 其他设备：自动下载 Nunito（OFL 免费商用）作为同名替代
+         * - CSS 只需声明 'SF Pro Rounded' 一个名字，无需 UA 嗅探
          */
+        @font-face {
+          font-family: 'SF Pro Rounded';
+          src: url('/fonts/Nunito-Variable.woff2') format('woff2-variations');
+          font-weight: 200 1000;
+          font-display: swap;
+        }
+
         .clock-time {
           display: flex;
           align-items: center;
@@ -429,10 +440,9 @@ export default function StandByClock() {
           font-variant-numeric: tabular-nums;
           font-size: clamp(4rem, 18vw, 20rem);
           font-family:
-            ui-rounded, -apple-system, BlinkMacSystemFont,
-            'SF Pro Rounded', 'SF Pro Display',
-            'Helvetica Neue', 'Arial',
-            'Segoe UI', Roboto, sans-serif;
+            ui-rounded, 'SF Pro Rounded',
+            -apple-system, BlinkMacSystemFont,
+            'Helvetica Neue', Arial, sans-serif;
         }
 
         /* 横屏：根据高度限制 */
