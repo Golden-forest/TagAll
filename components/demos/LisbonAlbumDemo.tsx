@@ -15,6 +15,7 @@ type FlatPhoto = AlbumPhoto & { chapterId: number; chapterLabel: string }
 export function LisbonAlbumDemo() {
   const [introCompleted, setIntroCompleted] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const [triggerElement, setTriggerElement] = useState<HTMLElement | null>(null)
 
   const flatPhotos: FlatPhoto[] = useMemo(() => {
     return lisbonAlbum.chapters.flatMap((c) =>
@@ -69,9 +70,12 @@ export function LisbonAlbumDemo() {
           <LisbonChapter
             key={chapter.id}
             chapter={chapter}
-            onPhotoClick={(photoIdx) => {
+            onPhotoClick={(photoIdx, triggerEl) => {
               const flatIdx = findFlatIndex(chapter.id, photoIdx)
-              if (flatIdx !== null) setLightboxIndex(flatIdx)
+              if (flatIdx !== null) {
+                setTriggerElement(triggerEl)
+                setLightboxIndex(flatIdx)
+              }
             }}
           />
         ))}
@@ -91,7 +95,11 @@ export function LisbonAlbumDemo() {
       <LisbonLightbox
         photos={flatPhotos}
         index={lightboxIndex}
-        onClose={() => setLightboxIndex(null)}
+        onClose={() => {
+          setLightboxIndex(null)
+          // Restore focus after lightbox unmounts
+          window.setTimeout(() => triggerElement?.focus(), 60)
+        }}
         onChange={setLightboxIndex}
         chapterLabel={lightboxIndex !== null ? flatPhotos[lightboxIndex]?.chapterLabel : undefined}
       />

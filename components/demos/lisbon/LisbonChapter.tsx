@@ -1,10 +1,11 @@
+import Image from 'next/image'
 import { Reveal } from '@/components/marketing/Reveal'
 import { LisbonPhotoGrid } from './LisbonPhotoGrid'
 import type { Chapter } from '@/content/lisbon-album'
 
 type Props = {
   chapter: Chapter
-  onPhotoClick: (photoIndex: number) => void
+  onPhotoClick: (photoIndex: number, triggerEl: HTMLElement) => void
 }
 
 export function LisbonChapter({ chapter, onPhotoClick }: Props) {
@@ -47,7 +48,7 @@ export function LisbonChapter({ chapter, onPhotoClick }: Props) {
             <LisbonPhotoGrid
               photos={chapter.photos}
               variant={chapter.gridVariant}
-              onPhotoClick={(i) => onPhotoClick(i)}
+              onPhotoClick={(i, el) => onPhotoClick(i, el)}
             />
             {chapter.photos.length > 0 && (
               <p className="mt-4 font-sans text-[10px] uppercase tracking-[0.18em] text-[#6b6d73]">
@@ -58,6 +59,23 @@ export function LisbonChapter({ chapter, onPhotoClick }: Props) {
               </p>
             )}
           </Reveal>
+          {chapter.id === 0 && (
+            <Reveal delay={0.24} className="mt-10">
+              <figure className="relative overflow-hidden rounded-2xl border border-white/8 bg-[#161a22]">
+                <Image
+                  src="/demo-assets/lisbon-route-map.svg"
+                  alt="Decorative map of the Lisbon region showing the 5-day trip route between Lisbon, Sintra, and Cascais"
+                  width={300}
+                  height={400}
+                  className="h-auto w-full max-w-[300px]"
+                  aria-hidden="true"
+                />
+                <figcaption className="absolute bottom-3 left-4 right-4 font-sans text-[10px] uppercase tracking-[0.16em] text-white/40">
+                  Route · Lisbon · Sintra · Cascais
+                </figcaption>
+              </figure>
+            </Reveal>
+          )}
         </div>
       </div>
     </section>

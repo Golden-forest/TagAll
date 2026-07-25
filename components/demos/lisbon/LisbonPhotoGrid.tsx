@@ -4,7 +4,7 @@ import type { AlbumPhoto, PhotoGridVariant } from '@/content/lisbon-album'
 type Props = {
   photos: AlbumPhoto[]
   variant: PhotoGridVariant
-  onPhotoClick?: (index: number) => void
+  onPhotoClick?: (index: number, triggerEl: HTMLElement) => void
 }
 
 export function LisbonPhotoGrid({ photos, variant, onPhotoClick }: Props) {
@@ -68,14 +68,14 @@ type PhotoCardProps = {
   aspect: string
   className?: string
   eager?: boolean
-  onClick?: (index: number) => void
+  onClick?: (index: number, triggerEl: HTMLElement) => void
 }
 
 function PhotoCard({ photo, index, aspect, className = '', eager, onClick }: PhotoCardProps) {
   return (
     <button
       type="button"
-      onClick={() => onClick?.(index)}
+      onClick={(e) => onClick?.(index, e.currentTarget)}
       className={`group relative overflow-hidden rounded-2xl bg-[#1f2329] text-left transition hover:-translate-y-0.5 ${
         aspect.includes('auto') ? 'h-full min-h-[280px]' : aspect
       } ${className}`}
