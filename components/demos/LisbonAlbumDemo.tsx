@@ -1,19 +1,51 @@
 'use client'
 
+import { useMemo, useState } from 'react'
+import Image from 'next/image'
 import { DemoChrome } from './DemoChrome'
 import { LisbonChapter } from './lisbon/LisbonChapter'
+import { LisbonLightbox } from './lisbon/LisbonLightbox'
 import { lisbonAlbum } from '@/content/lisbon-album'
+import type { AlbumPhoto } from '@/content/lisbon-album'
+
+// Flatten all photos across chapters, remembering which chapter each came from.
+type FlatPhoto = AlbumPhoto & { chapterId: number; chapterLabel: string }
 
 export function LisbonAlbumDemo() {
-  // Temporary stub: intro and lightbox will be added in subsequent tasks
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+
+  // Build a flat list of all photos for the lightbox traversal.
+  const flatPhotos: FlatPhoto[] = useMemo(() => {
+    return lisbonAlbum.chapters.flatMap((c) =>
+      c.photos.map((p) => ({ ...p, chapterId: c.id, chapterLabel: c.label })),
+    )
+  }, [])
+
+  // Map from (chapterId, photoIndexWithinChapter) -> flatIndex
+  const findFlatIndex = (chapterId: number, photoIndex: number) => {
+    let running = 0
+    for (const c of lisbonAlbum.chapters) {
+      if (c.id === chapterId) return running + photoIndex
+      running += c.photos.length
+    }
+    return null
+  }
+
   return (
     <DemoChrome slug="lisbon-album" tone="dark">
       <main className="bg-[#0e1014] text-[#f0f2f5]">
         {/* Hero (temporary static version — replaced by LisbonIntro in Task 5) */}
         <section className="relative flex min-h-[80vh] items-end overflow-hidden">
           <div className="absolute inset-0">
-            {/* Use first hero photo as placeholder */}
-            <ChapterHeroPhoto src={lisbonAlbum.heroPhotos[0].src} alt={lisbonAlbum.heroPhotos[0].alt} />
+            <Image
+              src={lisbonAlbum.heroPhotos[0].src}
+              alt={lisbonAlbum.heroPhotos[0].alt}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0e1014] via-[#0e1014]/30 to-transparent" />
           </div>
           <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 pb-16 sm:px-8 sm:pb-24">
             <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-[#d4a574]">
@@ -34,13 +66,14 @@ export function LisbonAlbumDemo() {
           <LisbonChapter
             key={chapter.id}
             chapter={chapter}
-            onPhotoClick={() => {
-              // Lightbox wired up in Task 4
+            onPhotoClick={(photoIdx) => {
+              const flatIdx = findFlatIndex(chapter.id, photoIdx)
+              if (flatIdx !== null) setLightboxIndex(flatIdx)
             }}
           />
         ))}
 
-        {/* Closing quote (epilogue extension) */}
+        {/* Closing quote */}
         <section className="mx-auto max-w-[1400px] px-5 py-32 sm:px-8 sm:py-48">
           <p className="mx-auto max-w-[28ch] text-center font-[Georgia,serif] text-[clamp(1.5rem,2.6vw,2.2rem)] font-normal italic leading-[1.3] tracking-[-0.02em] text-[#d4a574]">
             &ldquo;{lisbonAlbum.closingQuote}&rdquo;
@@ -50,17 +83,14 @@ export function LisbonAlbumDemo() {
           </p>
         </section>
       </main>
-    </DemoChrome>
-  )
-}
 
-// Temporary helper for the static hero (will be replaced by LisbonIntro)
-import Image from 'next/image'
-function ChapterHeroPhoto({ src, alt }: { src: string; alt: string }) {
-  return (
-    <>
-      <Image src={src} alt={alt} fill priority sizes="100vw" className="object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0e1014] via-[#0e1014]/30 to-transparent" />
-    </>
+      <LisbonLightbox
+        photos={flatPhotos}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onChange={setLightboxIndex}
+        chapterLabel={lightboxIndex !== null ? flatPhotos[lightboxIndex]?.chapterLabel : undefined}
+      />
+    </DemoChrome>
   )
 }
