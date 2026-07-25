@@ -85,7 +85,7 @@ export function LisbonAlbumDemo() {
           <p className="mx-auto max-w-[28ch] text-center font-[Georgia,serif] text-[clamp(1.5rem,2.6vw,2.2rem)] font-normal italic leading-[1.3] tracking-[-0.02em] text-[#d4a574]">
             &ldquo;{lisbonAlbum.closingQuote}&rdquo;
           </p>
-          <p className="mt-10 text-center font-sans text-[11px] uppercase tracking-[0.2em] text-[#6b6d73]">
+          <p className="mt-10 text-center font-sans text-[11px] uppercase tracking-[0.2em] text-[#8a8d94]">
             {lisbonAlbum.authorName} · Lisbon · 08.2026
           </p>
         </section>

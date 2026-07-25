@@ -79,7 +79,11 @@ function PhotoCard({ photo, index, aspect, className = '', eager, onClick }: Pho
       className={`group relative overflow-hidden rounded-2xl bg-[#1f2329] text-left transition hover:-translate-y-0.5 ${
         aspect.includes('auto') ? 'h-full min-h-[280px]' : aspect
       } ${className}`}
-      aria-label={photo.caption ? `Open ${photo.caption} in viewer` : 'Open photo in viewer'}
+      aria-label={
+        photo.caption
+          ? `Open ${photo.caption}${photo.location ? `, ${photo.location}` : ''} in viewer`
+          : 'Open photo in viewer'
+      }
     >
       <Image
         src={photo.src}

@@ -67,7 +67,7 @@ export function LisbonChapterNav({ chapters, visible }: Props) {
                 className={`group relative inline-flex h-7 items-center justify-center rounded-full px-2.5 font-sans text-[11px] font-medium tabular-nums transition sm:px-3 ${
                   isActive
                     ? 'bg-[#d4a574]/14 text-[#d4a574]'
-                    : 'text-white/40 hover:bg-white/6 hover:text-white/75'
+                    : 'text-white/55 hover:bg-white/6 hover:text-white/85'
                 }`}
                 aria-label={`Go to chapter ${c.id}: ${c.title}`}
                 aria-current={isActive ? 'true' : undefined}

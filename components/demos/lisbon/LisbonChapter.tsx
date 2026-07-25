@@ -24,20 +24,20 @@ export function LisbonChapter({ chapter, onPhotoClick }: Props) {
           >
             {paddedNumber}
           </p>
-          <p className="mt-3 font-sans text-[11px] uppercase tracking-[0.18em] text-[#6b6d73]">
+          <p className="mt-3 font-sans text-[11px] uppercase tracking-[0.18em] text-[#8a8d94]">
             {chapter.label}
-            {chapter.date && <span className="ml-2 text-[#8b8d93]">· {chapter.date}</span>}
+            {chapter.date && <span className="ml-2 text-[#8a8d94]">· {chapter.date}</span>}
           </p>
         </Reveal>
 
         <div className="md:col-span-9">
           <Reveal>
-            <h3
+            <h2
               id={`chapter-${chapter.id}-title`}
               className="font-[Georgia,serif] text-[clamp(1.75rem,2.6vw,2.4rem)] font-normal leading-[1.1] tracking-[-0.03em] text-[#f0f2f5]"
             >
               {chapter.title}
-            </h3>
+            </h2>
           </Reveal>
           <Reveal delay={0.08}>
             <p className="mt-6 max-w-[44ch] font-sans text-base leading-[1.7] text-[#a8aab0]">
@@ -51,10 +51,10 @@ export function LisbonChapter({ chapter, onPhotoClick }: Props) {
               onPhotoClick={(i, el) => onPhotoClick(i, el)}
             />
             {chapter.photos.length > 0 && (
-              <p className="mt-4 font-sans text-[10px] uppercase tracking-[0.18em] text-[#6b6d73]">
+              <p className="mt-4 font-sans text-[10px] uppercase tracking-[0.18em] text-[#8a8d94]">
                 {chapter.photos.length} photographs
                 {chapter.photos[0]?.location && (
-                  <span className="ml-2 text-[#4a4d55]">· {chapter.photos[0].location.split(',').pop()?.trim()}</span>
+                  <span className="ml-2">· {chapter.photos[0].location.split(',').pop()?.trim()}</span>
                 )}
               </p>
             )}
@@ -70,7 +70,7 @@ export function LisbonChapter({ chapter, onPhotoClick }: Props) {
                   className="h-auto w-full max-w-[300px]"
                   aria-hidden="true"
                 />
-                <figcaption className="absolute bottom-3 left-4 right-4 font-sans text-[10px] uppercase tracking-[0.16em] text-white/40">
+                <figcaption className="absolute bottom-3 left-4 right-4 font-sans text-[10px] uppercase tracking-[0.16em] text-white/55">
                   Route · Lisbon · Sintra · Cascais
                 </figcaption>
               </figure>

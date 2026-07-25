@@ -189,7 +189,7 @@ export function LisbonLightbox({ photos, index, onClose, onChange, chapterLabel 
                   {photo.location && <span>{photo.location}</span>}
                 </div>
               </div>
-              <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-white/35">
+              <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-white/55">
                 ESC to close · ← → to navigate
               </p>
             </div>
