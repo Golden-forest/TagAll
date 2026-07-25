@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { DemoChrome } from './DemoChrome'
 import { LisbonChapter } from './lisbon/LisbonChapter'
 import { LisbonLightbox } from './lisbon/LisbonLightbox'
+import { LisbonChapterNav } from './lisbon/LisbonChapterNav'
 import { LisbonIntro } from './lisbon/LisbonIntro'
 import { lisbonAlbum } from '@/content/lisbon-album'
 import type { AlbumPhoto } from '@/content/lisbon-album'
@@ -86,6 +87,7 @@ export function LisbonAlbumDemo() {
         </section>
       </main>
 
+      <LisbonChapterNav chapters={lisbonAlbum.chapters} visible={introCompleted} />
       <LisbonLightbox
         photos={flatPhotos}
         index={lightboxIndex}
