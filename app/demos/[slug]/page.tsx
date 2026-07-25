@@ -7,6 +7,7 @@ import { PetTagDemo } from '@/components/demos/PetTagDemo'
 import { PortraitStoryDemo } from '@/components/demos/PortraitStoryDemo'
 import { ResumeDemo } from '@/components/demos/ResumeDemo'
 import { WeddingDemo } from '@/components/demos/WeddingDemo'
+import { LisbonAlbumDemo } from '@/components/demos/LisbonAlbumDemo'
 
 const pages = {
   'smart-pet-tag': PetTagDemo,
@@ -15,6 +16,7 @@ const pages = {
   'interactive-resume': ResumeDemo,
   'wedding-invitation': WeddingDemo,
   'creator-product-story': CreatorStoryDemo,
+  'lisbon-album': LisbonAlbumDemo,
 } as const
 
 export function generateStaticParams() {

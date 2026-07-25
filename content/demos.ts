@@ -63,6 +63,16 @@ export const demos: DemoDefinition[] = [
     image: '/demo-assets/creator-hero.webp',
     href: '/demos/creator-product-story',
   },
+  {
+    slug: 'lisbon-album',
+    title: 'Lisbon Photo Album',
+    shortTitle: 'Lisbon Album',
+    category: 'Travel and Events',
+    description:
+      'A 5-day travelogue with cinematic intro animation, chapter timeline, and full-screen photo viewer.',
+    image: '/demo-assets/lisbon-day1-01.webp',
+    href: '/demos/lisbon-album',
+  },
 ]
 
 export function findDemo(slug: string) {
