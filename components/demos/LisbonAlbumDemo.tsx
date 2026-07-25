@@ -5,23 +5,22 @@ import Image from 'next/image'
 import { DemoChrome } from './DemoChrome'
 import { LisbonChapter } from './lisbon/LisbonChapter'
 import { LisbonLightbox } from './lisbon/LisbonLightbox'
+import { LisbonIntro } from './lisbon/LisbonIntro'
 import { lisbonAlbum } from '@/content/lisbon-album'
 import type { AlbumPhoto } from '@/content/lisbon-album'
 
-// Flatten all photos across chapters, remembering which chapter each came from.
 type FlatPhoto = AlbumPhoto & { chapterId: number; chapterLabel: string }
 
 export function LisbonAlbumDemo() {
+  const [introCompleted, setIntroCompleted] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
-  // Build a flat list of all photos for the lightbox traversal.
   const flatPhotos: FlatPhoto[] = useMemo(() => {
     return lisbonAlbum.chapters.flatMap((c) =>
       c.photos.map((p) => ({ ...p, chapterId: c.id, chapterLabel: c.label })),
     )
   }, [])
 
-  // Map from (chapterId, photoIndexWithinChapter) -> flatIndex
   const findFlatIndex = (chapterId: number, photoIndex: number) => {
     let running = 0
     for (const c of lisbonAlbum.chapters) {
@@ -33,9 +32,12 @@ export function LisbonAlbumDemo() {
 
   return (
     <DemoChrome slug="lisbon-album" tone="dark">
-      <main className="bg-[#0e1014] text-[#f0f2f5]">
-        {/* Hero (temporary static version — replaced by LisbonIntro in Task 5) */}
-        <section className="relative flex min-h-[80vh] items-end overflow-hidden">
+      {/* Intro overlay (until complete) */}
+      {!introCompleted && <LisbonIntro onComplete={() => setIntroCompleted(true)} />}
+
+      <main className="bg-[#0e1014] text-[#f0f2f5]" aria-hidden={!introCompleted}>
+        {/* Hero (becomes visible after intro; gives the scroll target something to land on) */}
+        <section className="relative flex min-h-[100dvh] items-end overflow-hidden">
           <div className="absolute inset-0">
             <Image
               src={lisbonAlbum.heroPhotos[0].src}
