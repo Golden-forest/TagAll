@@ -8,6 +8,8 @@ import { PortraitStoryDemo } from '@/components/demos/PortraitStoryDemo'
 import { ResumeDemo } from '@/components/demos/ResumeDemo'
 import { WeddingDemo } from '@/components/demos/WeddingDemo'
 import { LisbonAlbumDemo } from '@/components/demos/LisbonAlbumDemo'
+import { PhotoAlbumDemo } from '@/components/demos/PhotoAlbumDemo'
+import { yunnanAlbum } from '@/content/yunnan-album'
 
 const pages = {
   'smart-pet-tag': PetTagDemo,
@@ -17,6 +19,7 @@ const pages = {
   'wedding-invitation': WeddingDemo,
   'creator-product-story': CreatorStoryDemo,
   'lisbon-album': LisbonAlbumDemo,
+  'yunnan-album': () => <PhotoAlbumDemo data={yunnanAlbum} slug="yunnan-album" />,
 } as const
 
 export function generateStaticParams() {

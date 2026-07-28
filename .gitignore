@@ -17,6 +17,15 @@ dist-ssr
 out/
 .superpowers/
 
+# Temp files & backups
+.tmp-*
+.yunnan-hero-bak/
+.yunnan-hero-bak-v2/
+public/demo-assets/.yunnan-hero-bak/
+public/demo-assets/.yunnan-hero-bak-v2/
+public/demo-assets/.yunnan-unsplash/
+lighthouse-reports/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

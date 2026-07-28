@@ -73,6 +73,16 @@ export const demos: DemoDefinition[] = [
     image: '/demo-assets/lisbon-day1-01.webp',
     href: '/demos/lisbon-album',
   },
+  {
+    slug: 'yunnan-album',
+    title: 'Yunnan Photo Album',
+    shortTitle: '云南游记',
+    category: 'Travel and Events',
+    description:
+      'A bilingual 5-day Yunnan road-trip travelogue — Kunming, Shangri-La, Tiger Leaping Gorge, and Lijiang.',
+    image: '/demo-assets/yunnan-hero-01.webp',
+    href: '/demos/yunnan-album',
+  },
 ]
 
 export function findDemo(slug: string) {
